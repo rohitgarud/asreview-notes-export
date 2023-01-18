@@ -42,7 +42,7 @@ setup(
     extras_require={},
     entry_points={
         "asreview.entry_points": [
-            "notes_export = asreviewcontrib.insights.entrypoint:ExportEntryPoint",
+            "notes_export = asreviewcontrib.notes_export.entrypoint:ExportEntryPoint",
         ]
     },
     project_urls={
