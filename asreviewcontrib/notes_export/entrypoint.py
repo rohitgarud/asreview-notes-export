@@ -15,7 +15,7 @@ class ExportEntryPoint(BaseEntryPoint):
         return __version__
 
     def execute(self, argv):
-        parser = argparse.ArgumentParser(prog='asreview notes-export')
+        parser = argparse.ArgumentParser(prog='asreview notes_export')
         parser.add_argument("--only-with-notes",
                             action='store_true',
                             dest="only_with_notes",
