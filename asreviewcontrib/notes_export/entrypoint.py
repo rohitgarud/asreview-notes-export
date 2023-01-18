@@ -1,4 +1,11 @@
 import argparse
+import shutil
+from pathlib import Path
+import os
+
+import pandas as pd
+from asreview import ASReviewProject
+from asreview import ASReviewData
 
 from asreview import open_state
 from asreview.entry_points import BaseEntryPoint
@@ -21,16 +28,28 @@ class ExportEntryPoint(BaseEntryPoint):
                             default="all",
                             help="")
         
-        parser.add_argument('asreview_files',
-                            metavar='asreview_files',
+        parser.add_argument('asreview_file',
+                            metavar='asreview_file',
                             type=str,
                             nargs='+',
-                            help='A (list of) ASReview files.')
+                            help='ASReview file')
 
         args = parser.parse_args(argv)
+        
+        project_path = Path("tmp_data")
+        project_path.mkdir()
+        project = ASReviewProject.load(args.asreview_file, project_path)
+        dataset_fp = Path(project_path, project.config['id'], "data", project.config['dataset_path'])
+        dataset = ASReviewData.from_file(dataset_fp)
+        
+        outoutfile_name = os.path.basename(args.asreview_file)
+        outoutfile_name = f"{os.path.splitext(outoutfile_name)[0]}.csv"
 
-        if len(args.asreview_files) > 1:
-            raise ValueError("Exporting notes from multiple project files via the CLI is not supported yet.")
+        with open_state(args.asreview_file) as state:
+            df = state.get_dataset()
+            df['labeling_order'] = df.index
+            dataset_with_results = dataset.df.join(df.set_index('record_id')[['labeling_order','label','notes']])
+            dataset_with_results.rename(columns={'labeling_order':'Ranking', 'label':'Included'}, inplace=True)
+            dataset_with_results.to_csv(outoutfile_name, index=False)
 
-        with open_state(args.asreview_files[0]) as s:
-            pass
+        shutil.rmtree(project_path)
