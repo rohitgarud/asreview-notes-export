@@ -46,7 +46,7 @@ def get_config():
     cfg.style = "pep440"
     cfg.tag_prefix = ""
     cfg.parentdir_prefix = "None"
-    cfg.versionfile_source = "asreviewcontrib\comment_export\_version.py"
+    cfg.versionfile_source = "asreviewcontrib\notes_export\_version.py"
     cfg.verbose = False
     return cfg
 
