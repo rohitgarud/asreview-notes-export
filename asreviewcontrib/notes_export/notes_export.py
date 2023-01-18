@@ -13,13 +13,7 @@ def export_notes(asreview_filename, only_with_notes=False):
     
     dataset_fp = Path(project_path, project.config['id'], "data", project.config['dataset_path'])
     dataset = ASReviewData.from_file(dataset_fp)
-
-    project_path = Path("tmp_data")
-    project_path.mkdir()
-    project = ASReviewProject.load(asreview_filename, project_path)
-    dataset_fp = Path(project_path, project.config['id'], "data", project.config['dataset_path'])
-    dataset = ASReviewData.from_file(dataset_fp)
-    
+   
     outoutfile_name = os.path.basename(asreview_filename)
     outoutfile_name = f"{os.path.splitext(outoutfile_name)[0]}.csv"
 
