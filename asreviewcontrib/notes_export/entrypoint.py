@@ -1,12 +1,5 @@
 import argparse
-import shutil
-from pathlib import Path
-import os
-import pandas as pd
 
-from asreview import ASReviewProject
-from asreview import ASReviewData
-from asreview import open_state
 from asreview.entry_points import BaseEntryPoint
 
 from asreviewcontrib.notes_export.notes_export import export_notes
