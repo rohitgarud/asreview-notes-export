@@ -8,7 +8,7 @@ from asreview import ASReviewData
 
 def export_notes(asreview_filename, only_with_notes=False):
     project_path = Path("tmp_data")
-    project_path.mkdir()
+    project_path.mkdir(parents=True, exist_ok=True)
     project = ASReviewProject.load(asreview_filename, project_path)
     
     dataset_fp = Path(project_path, project.config['id'], "data", project.config['dataset_path'])
