@@ -29,6 +29,18 @@ To export only the records with notes from the dataset, we can use the following
 asreview notes_export --only-with-notes YOUR_ASREVIEW_FILE.asreview
 ```
 
+The filename of the output .csv is the same as the name of .asreview file. To save the output to .csv file with a custom filename, we can use the following command. We can either specify the extension:
+```
+asreview notes_export --only-with-notes YOUR_ASREVIEW_FILE.asreview -o YOUR_OUTPUT_FILENAME.csv
+```  
+
+or only the filename will suffice, without an extension, using the following command:
+```
+asreview notes_export --only-with-notes YOUR_ASREVIEW_FILE.asreview -o YOUR_OUTPUT_FILENAME
+``` 
+
+Note that currently only .csv output is supported. 
+
 ## License
 The extension is published under the [Apache 2.0 license](https://github.com/rohitgarud/asreview-notes-export/blob/main/LICENSE).
 
