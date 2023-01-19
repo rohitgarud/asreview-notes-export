@@ -38,7 +38,7 @@ class ExportEntryPoint(BaseEntryPoint):
         parser.add_argument(
             "-o",
             "--output",
-            dest="outoutfile_name",
+            dest="outputfile_name",
             help='Output file name or path. Currently only .csv files are supported.')
 
         args = parser.parse_args(argv)
@@ -51,14 +51,14 @@ class ExportEntryPoint(BaseEntryPoint):
             
         if args.outputfile_name:
             outputfile_name = args.outputfile_name
-            if not outoutfile_name.endswith('.csv'):
+            if not outputfile_name.endswith('.csv'):
                 if '.' in outputfile_name:
                     raise ValueError("File extensions other than .csv are not supported yet")
                 else:
                     outputfile_name += '.csv'
         else:
-            outoutfile_name = os.path.basename(asreview_filename)
-            outoutfile_name = f"{os.path.splitext(outoutfile_name)[0]}-{datetime.now().strftime('%Y%m%dT%H%M')}.csv"
+            outputfile_name = os.path.basename(asreview_filename)
+            outputfile_name = f"{os.path.splitext(outputfile_name)[0]}-{datetime.now().strftime('%Y%m%dT%H%M')}.csv"
                 
         export_notes(
             asreview_filename=asreview_filename,
