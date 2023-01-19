@@ -29,6 +29,8 @@ class ExportEntryPoint(BaseEntryPoint):
 
         args = parser.parse_args(argv)
         
+        print(args.asreview_file)
+        
         export_notes(
             asreview_filename=args.asreview_file,
             only_with_notes=args.only_with_notes
