@@ -4,7 +4,6 @@ from asreview.entry_points import BaseEntryPoint
 
 from asreviewcontrib.notes_export.notes_export import export_notes
 
-
 class ExportEntryPoint(BaseEntryPoint):
     description = "Exporting notes from ASReview with dataset"
     extension_name = "asreview-notes-export"
@@ -21,18 +20,27 @@ class ExportEntryPoint(BaseEntryPoint):
                             dest="only_with_notes",
                             help="Only include records with notes in the exported file")
        
-        parser.add_argument('asreview_file',
-                            metavar='asreview_file',
+        parser.add_argument('asreview_files',
+                            metavar='asreview_files',
                             type=str,
                             nargs='+',
-                            help='ASReview file')
+                            help='A (list of) ASReview files')
+        
+        parser.add_argument(
+            "-V",
+            "--version",
+            action="version",
+            version=f"asreview-notes-export: {self.version}",
+        )
 
         args = parser.parse_args(argv)
         
-        print(args.asreview_file)
-        
+        if len(args.asreview_files) > 1:
+            raise ValueError("Exporting notes from multiple project files"
+                            " via the CLI is not supported yet.")
+                
         export_notes(
-            asreview_filename=args.asreview_file,
+            asreview_filename=args.asreview_files[0],
             only_with_notes=args.only_with_notes
         )
         
