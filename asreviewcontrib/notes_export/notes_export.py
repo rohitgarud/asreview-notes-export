@@ -8,6 +8,21 @@ from asreview import ASReviewProject
 from asreview import ASReviewData
 
 def export_notes(asreview_filename, only_with_notes=False):
+    """Export notes with data from ASReview file
+            Parameters
+            ----------
+            asreview_filename: str,
+                File name of ASreview file with .asreview extension
+                
+            only_with_notes: bool,
+                Flag if True exports only records with notes to dataset csv
+            
+            Returns
+            -------
+            None
+            
+            csv file is generated in the current directory
+    """
     project_path = Path("tmp_data")
     project_path.mkdir(parents=True, exist_ok=True)
     project = ASReviewProject.load(asreview_filename, project_path)
