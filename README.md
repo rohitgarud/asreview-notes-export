@@ -1,6 +1,4 @@
-[![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
-
-[![PyPI version](https://badge.fury.io/py/asreview-notes-export.svg)](https://badge.fury.io/py/asreview-notes-export)
+[![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](https://opensource.org/licenses/Apache-2.0) [![PyPI version](https://badge.fury.io/py/asreview-notes-export.svg)](https://badge.fury.io/py/asreview-notes-export)
 
 # ASReview Notes Export Extension
 This is a simple extension for [ASReview](https://github.com/asreview) ![logo](https://raw.githubusercontent.com/asreview/asreview-artwork/e2e6e5ea58a22077b116b9c3d2a15bc3fea585c7/SVGicons/IconELAS/ELASeyes24px24px.svg "ASReview") that can be used to export notes from the ASReview GUI while exporting the labeled or partially labeled dataset as .csv file.
