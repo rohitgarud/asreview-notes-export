@@ -45,5 +45,5 @@ Note that currently only .csv output is supported.
 The extension is published under the [Apache 2.0 license](https://github.com/rohitgarud/asreview-notes-export/blob/main/LICENSE).
 
 ## Contact
-This is an unofficial extension of ASReview and is maintained by [Rohit Garud](https://github.com/rohitgarud). 
+This is an unofficial extension of ASReview and is developed and maintained by [Rohit Garud](https://github.com/rohitgarud). 
 
