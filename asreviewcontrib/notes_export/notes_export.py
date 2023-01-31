@@ -43,7 +43,9 @@ def export_notes(asreview_filename, output_filename, only_with_notes=False):
         # to avoid column name conflict while joining dataframes
         screening = 0
         for col in dataset.df.columns:
-            if col.startswith("exported_notes"):
+            if col == "exported_notes":
+                screening = 0
+            elif col.startswith("exported_notes"):
                 screening = int(col.split("_")[2])
         screening += 1
 
