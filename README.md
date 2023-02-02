@@ -29,7 +29,12 @@ To export only the records with notes from the dataset, we can use the following
 asreview notes_export --only-with-notes YOUR_ASREVIEW_FILE.asreview
 ```
 
-The filename of the output .csv is the same as the name of .asreview file. To save the output to .csv file with a custom filename, we can use the following command. We can either specify the extension:
+To include the labeling order in the exported dataset, use following optional argument:
+```console
+asreview notes_export --labeling-order YOUR_ASREVIEW_FILE.asreview
+``` 
+
+By default, the filename of the output .csv is the same as the name of .asreview file. To save the output to .csv file with a custom filename, we can use the following command. We can either specify the extension:
 ```
 asreview notes_export --only-with-notes YOUR_ASREVIEW_FILE.asreview -o YOUR_OUTPUT_FILENAME.csv
 ```  

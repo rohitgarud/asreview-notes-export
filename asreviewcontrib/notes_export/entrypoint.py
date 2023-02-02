@@ -27,6 +27,13 @@ class ExportEntryPoint(BaseEntryPoint):
         )
 
         parser.add_argument(
+            "--labeling-order",
+            action="store_true",
+            dest="labeling_order",
+            help="Export labeling order with notes",
+        )
+
+        parser.add_argument(
             "asreview_files",
             metavar="asreview_files",
             type=str,
@@ -75,4 +82,5 @@ class ExportEntryPoint(BaseEntryPoint):
             asreview_filename=asreview_filename,
             output_filename=outputfile_name,
             only_with_notes=args.only_with_notes,
+            labeling_order=args.labeling_order,
         )

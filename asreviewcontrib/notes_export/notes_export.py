@@ -7,15 +7,23 @@ from asreview import ASReviewProject
 from asreview import ASReviewData
 
 
-def export_notes(asreview_filename, output_filename, only_with_notes=False):
+def export_notes(
+    asreview_filename, output_filename, only_with_notes=False, labeling_order=False
+):
     """Export notes with data from ASReview file
     Parameters
     ----------
     asreview_filename: str,
         File name of ASreview file with .asreview extension
 
+    output_filename: str,
+        File name of output file with .csv extension
+
     only_with_notes: bool,
         Flag if True exports only records with notes to dataset csv
+
+    labeling_order: bool,
+        Flag if True exports labeling order with notes to dataset csv
 
     Returns
     -------
@@ -56,16 +64,24 @@ def export_notes(asreview_filename, output_filename, only_with_notes=False):
             },
             inplace=True,
         )
-        df[f"labeling_order_{screening}"] = df.index
+
+        if labeling_order:
+            df[f"labeling_order_{screening}"] = df.index
+
+            included_columns = [
+                f"labeling_order_{screening}",
+                f"Included_{screening}",
+                f"exported_notes_{screening}",
+            ]
+
+        else:
+            included_columns = [
+                f"Included_{screening}",
+                f"exported_notes_{screening}",
+            ]
 
         dataset_with_results = dataset.df.join(
-            df.set_index("record_id")[
-                [
-                    f"labeling_order_{screening}",
-                    f"Included_{screening}",
-                    f"exported_notes_{screening}",
-                ]
-            ],
+            df.set_index("record_id")[included_columns],
             on="record_id",
         )
 
