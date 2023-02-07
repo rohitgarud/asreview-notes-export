@@ -1,14 +1,23 @@
 import shutil
 from pathlib import Path
 import os
+import re
 
 from asreview import open_state
 from asreview import ASReviewProject
 from asreview import ASReviewData
 
 
+def parse_tags_from_note(note):
+    return re.findall(r"tags: *(.*)", note.lower())[0].strip().split(",")
+
+
 def export_notes(
-    asreview_filename, output_filename, only_with_notes=False, labeling_order=False
+    asreview_filename,
+    output_filename,
+    tags=None,
+    only_with_notes=False,
+    labeling_order=False,
 ):
     """Export notes with data from ASReview file
     Parameters
@@ -18,6 +27,9 @@ def export_notes(
 
     output_filename: str,
         File name of output file with .csv extension
+
+    tags: str,
+        Tags mentioned in notes using TAGS: followed by tags separated by comma. Only records associated with the list of tags will be exported
 
     only_with_notes: bool,
         Flag if True exports only records with notes to dataset csv
@@ -84,6 +96,12 @@ def export_notes(
             df.set_index("record_id")[included_columns],
             on="record_id",
         )
+
+    dataset_with_results["tags"] = (
+        dataset_with_results[f"exported_notes_{screening}"]
+        .copy()
+        .apply(parse_tags_from_note)
+    )
 
     if only_with_notes:
         dataset_with_results = dataset_with_results[
