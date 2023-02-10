@@ -31,7 +31,7 @@ asreview notes_export --only-with-notes YOUR_ASREVIEW_FILE.asreview
 ```
 
 To include the labeling order in the exported dataset, use following optional argument:
-```console
+```
 asreview notes_export --labeling-order YOUR_ASREVIEW_FILE.asreview
 ``` 
 
