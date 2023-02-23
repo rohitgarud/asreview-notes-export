@@ -1,21 +1,15 @@
-import shutil
-from pathlib import Path
 import os
 import re
+import shutil
+from pathlib import Path
 
-from asreview import open_state
-from asreview import ASReviewProject
-from asreview import ASReviewData
-
-
-def parse_tags_from_note(note):
-    return re.findall(r"tags: *(.*)", note.lower())[0].strip().split(",")
+import numpy as np
+from asreview import ASReviewData, ASReviewProject, open_state
 
 
 def export_notes(
     asreview_filename,
     output_filename,
-    tags=None,
     only_with_notes=False,
     labeling_order=False,
 ):
@@ -27,9 +21,6 @@ def export_notes(
 
     output_filename: str,
         File name of output file with .csv extension
-
-    tags: str,
-        Tags mentioned in notes using TAGS: followed by tags separated by comma. Only records associated with the list of tags will be exported
 
     only_with_notes: bool,
         Flag if True exports only records with notes to dataset csv
@@ -63,10 +54,13 @@ def export_notes(
         # to avoid column name conflict while joining dataframes
         screening = 0
         for col in dataset.df.columns:
-            if col == "exported_notes":
+            if col == "exported_notes" or col == "labeling_order":
                 screening = 0
             elif col.startswith("exported_notes"):
-                screening = int(col.split("_")[2])
+                try:
+                    screening = int(col.split("_")[2])
+                except IndexError:
+                    screening = 0
         screening += 1
 
         df.rename(
@@ -96,12 +90,6 @@ def export_notes(
             df.set_index("record_id")[included_columns],
             on="record_id",
         )
-
-    dataset_with_results["tags"] = (
-        dataset_with_results[f"exported_notes_{screening}"]
-        .copy()
-        .apply(parse_tags_from_note)
-    )
 
     if only_with_notes:
         dataset_with_results = dataset_with_results[

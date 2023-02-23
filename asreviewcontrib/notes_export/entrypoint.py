@@ -34,13 +34,6 @@ class ExportEntryPoint(BaseEntryPoint):
         )
 
         parser.add_argument(
-            "--tags",
-            nargs="+",
-            type=str,
-            help="Export only the records with particular tags",
-        )
-
-        parser.add_argument(
             "asreview_files",
             metavar="asreview_files",
             type=str,
@@ -88,7 +81,6 @@ class ExportEntryPoint(BaseEntryPoint):
         export_notes(
             asreview_filename=asreview_filename,
             output_filename=outputfile_name,
-            tags=args.tags,
             only_with_notes=args.only_with_notes,
             labeling_order=args.labeling_order,
         )
