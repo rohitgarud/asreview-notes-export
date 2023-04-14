@@ -4,6 +4,7 @@
 # ASReview Notes Export Extension
 This is a simple extension for [ASReview](https://github.com/asreview) ![logo](https://raw.githubusercontent.com/asreview/asreview-artwork/e2e6e5ea58a22077b116b9c3d2a15bc3fea585c7/SVGicons/IconELAS/ELASeyes24px24px.svg "ASReview") that can be used to export notes from the ASReview GUI while exporting the labeled or partially labeled dataset as .csv file.
 
+### THIS EXTENSION IS NO LONGER REQUIRED AS NOTES EXPORT IS PART OF CORE FUNCTIONALITY OF ASREVIEW AFTER RELEASE v1.2
 ## Installation
 ASReview notes-export can be installed from PyPI:
 ```bash
